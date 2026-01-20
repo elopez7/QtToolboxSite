@@ -1,5 +1,5 @@
 +++
-title = "Compose"
+title = "QtToolBox"
 [data]
 baseChartOn = 3
 colors = ["#627c62", "#11819b", "#ef7f1a", "#4e1154"]
@@ -11,25 +11,30 @@ title = "Projects"
 {{< block "grid-2" >}}
 {{< column >}}
 
-# Compose your Docs with **Ease**.
+# A set of useful utilities written in Qt.
 
-Compose is a lean `Hugo` documentation theme, inspired by [forestry.io](https://web.archive.org/web/20190331052103/https://forestry.io/docs/welcome/)(now TinaCMS).
+QtToolbox is a project created to improve `C++, QML and CMake` Skills.
+The goal of the project was to bring three unfinished Qt apps and combine them into one.
+<br>
+Here is what it can do:
 
-Compose ships with tina cms [configuration](docs/compose/use-tina-cms/).
-
-{{< tip "warning" >}}
-Feel free to open a [PR](https://github.com/onweru/compose/pulls), raise an [issue](https://github.com/onweru/compose/issues/new/choose "Open a Github Issue")(s) or request new feature(s). {{< /tip >}}
+{{< tip>}}
+Generate a fizzbuzz table where you can choose the value of `fizz` and the value of `fuzz` and how many numbers will be generated.
+ {{< /tip >}}
 
 {{< tip >}}
-You can generate diagrams, flowcharts, and piecharts from text in a similar manner as markdown using [mermaid](./docs/compose/mermaid/).
-
-Or, [generate graphs, charts](docs/compose/graphs-charts-tables/#show-a-pie-doughnut--bar-chart-at-once) and tables from a csv, ~~or a json~~ file.
+Customize a password generator by selecting between letters, symbols, numbers or everything together.
 {{< /tip >}}
 
-{{< button "docs/compose/" "Read the Docs" >}}{{< button "https://github.com/onweru/compose" "Download Theme" >}}
+{{< tip >}}
+Use a simple mortgage generator to calculate a payment plan.
+{{< /tip >}}
+
+<a href="/app/appQtToolBox.html" target="_blank" class="button">Open QtToolbox</a>
 {{< /column >}}
 
 {{< column >}}
-![diy](/images/scribble.jpg)
+![diy](/images/app.png)
 {{< /column >}}
+
 {{< /block >}}
