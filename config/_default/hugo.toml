@@ -1,4 +1,4 @@
-baseURL = "https://QtToolbox.com/"
+baseURL = "https://qttoolbox.netlify.app/"
 title = "QtToolbox"
 enableRobotsTXT = true
 # this example loads the theme as hugo module
