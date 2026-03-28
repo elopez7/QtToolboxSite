@@ -1,4 +1,0 @@
-baseURL = 'https://qttoolbox.netlify.app/'
-languageCode = 'en-us'
-title = 'QtToolbox'
-theme = "compose"

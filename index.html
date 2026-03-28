@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QtToolbox</title>
+  <meta name="description" content="A collection of useful utilities built with Qt — FizzBuzz, Password Generator, and Loan Calculator. Try it in your browser.">
+  <link rel="icon" href="/images/Toolbox.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0f0f0f;
+      --bg-secondary: #1a1a1a;
+      --bg-tertiary: #242424;
+      --bg-elevated: #2d2d2d;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-tertiary: #6b6b6b;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-pressed: #2563eb;
+      --accent-muted: rgba(59, 130, 246, 0.15);
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-medium: rgba(255, 255, 255, 0.2);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+    }
+
+    /* Nav */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--border-subtle);
+      background-color: var(--bg-secondary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .nav-brand img {
+      height: 32px;
+      width: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 80px 32px 64px;
+      gap: 24px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.15s, transform 0.1s;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+
+    /* Showcase */
+    .showcase {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .showcase-heading {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 56px;
+      padding-top: 48px;
+    }
+
+    .showcase-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    .showcase-item.reverse {
+      direction: rtl;
+    }
+
+    .showcase-item.reverse > * {
+      direction: ltr;
+    }
+
+    .showcase-text {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .showcase-icon {
+      font-size: 40px;
+    }
+
+    .showcase-text h3 {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .showcase-text p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    .showcase-img {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border-subtle);
+      padding: 24px 32px;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+    }
+
+    /* GitHub icon */
+    .icon-github {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 48px 20px 40px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .btn {
+        justify-content: center;
+      }
+
+      .showcase-item,
+      .showcase-item.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 24px;
+      }
+
+      .showcase {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      nav {
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-brand">
+      <img src="/images/Toolbox.svg" alt="QtToolbox logo">
+      QtToolbox
+    </div>
+    <div class="nav-links">
+      <a href="https://github.com/elopez7/QtToolbox" target="_blank" rel="noopener">
+        <svg class="icon-github" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1>A Toolbox Built with <span>Qt</span></h1>
+      <p>A collection of useful utilities written in C++ and QML. Built as a learning project to sharpen Qt skills — now running in your browser via WebAssembly.</p>
+      <div class="hero-actions">
+        <a href="/app/appQtToolBox.html" class="btn btn-primary" target="_blank">Launch App</a>
+        <a href="https://github.com/elopez7/QtToolbox" class="btn btn-secondary" target="_blank" rel="noopener">
+          <svg class="icon-github" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          View Source
+        </a>
+      </div>
+    </section>
+
+    <section class="showcase">
+      <h2 class="showcase-heading">What's Inside</h2>
+
+      <div class="showcase-item">
+        <img class="showcase-img" src="/images/home.png" alt="QtToolbox home screen showing the three utility cards">
+        <div class="showcase-text">
+          <span class="showcase-icon" aria-hidden="true">&#x1F3E0;</span>
+          <h3>All Your Tools in One Place</h3>
+          <p>A clean dashboard with quick access to every utility. Navigate between tools using the sidebar — no clutter, just the tools you need.</p>
+        </div>
+      </div>
+
+      <div class="showcase-item reverse">
+        <img class="showcase-img" src="/images/fizzbuzz.png" alt="FizzBuzz tool showing colorful results grid and statistics">
+        <div class="showcase-text">
+          <span class="showcase-icon" aria-hidden="true">&#x1F4E2;</span>
+          <h3>FizzBuzz</h3>
+          <p>Generate the classic FizzBuzz sequence with customizable multiples. See color-coded results and live statistics for Fizz, Buzz, and FizzBuzz counts.</p>
+        </div>
+      </div>
+
+      <div class="showcase-item">
+        <img class="showcase-img" src="/images/password.png" alt="Password Generator with strength indicator and character type toggles">
+        <div class="showcase-text">
+          <span class="showcase-icon" aria-hidden="true">&#x1F512;</span>
+          <h3>Password Generator</h3>
+          <p>Create secure passwords with adjustable length and character types. Toggle uppercase, lowercase, numbers, and symbols with a real-time strength indicator.</p>
+        </div>
+      </div>
+
+      <div class="showcase-item reverse">
+        <img class="showcase-img" src="/images/loan.png" alt="Loan Calculator with donut chart showing principal vs interest breakdown">
+        <div class="showcase-text">
+          <span class="showcase-icon" aria-hidden="true">&#x1F4B0;</span>
+          <h3>Loan Calculator</h3>
+          <p>Calculate monthly payments with an interactive donut chart breakdown. Adjust loan amount, term, and interest rate to see principal vs. interest at a glance.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Built with Qt &amp; QML by <a href="https://estebanlopezp.com/" target="_blank" rel="noopener">Esteban Lopez</a> &mdash; <a href="https://github.com/elopez7/QtToolbox" target="_blank" rel="noopener">elopez7/QtToolbox</a>
+  </footer>
+</body>
+</html>
